@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS pagamentos_residencia
     FOREIGN KEY (id_residencia) REFERENCES residencias (id)
 );
 
-CREATE TABLE IF NOT EXISTS morador_residencia
+CREATE TABLE IF NOT EXISTS moradores_residencias
 (
     id            INT PRIMARY KEY AUTO_INCREMENT,
     id_residencia INT,
