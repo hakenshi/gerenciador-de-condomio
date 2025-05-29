@@ -4,10 +4,12 @@
  */
 package com.mycompany.gerenciador.de.condominio.Models;
 
+import com.mycompany.gerenciador.de.condominio.Enums.StatusPagamento;
+
 /**
  *
  * @author fkdia
  */
-public class PagamentoResidencia {
+public record PagamentoResidencia (int id, int id_residencia, double valor_pagamento,StatusPagamento status) {
     
 }

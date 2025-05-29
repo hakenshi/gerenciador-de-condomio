@@ -8,6 +8,6 @@ package com.mycompany.gerenciador.de.condominio.Models;
  *
  * @author fkdia
  */
-public class Residencia {
+public record Residencia (int id, String rua, String cep, int numero) {
     
 }

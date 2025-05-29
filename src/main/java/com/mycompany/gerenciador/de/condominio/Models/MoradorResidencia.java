@@ -5,9 +5,8 @@
 package com.mycompany.gerenciador.de.condominio.Models;
 
 /**
- *
  * @author fkdia
  */
-public class MoradorResidencia {
-    
+public record MoradorResidencia(Pessoa proprietario, Residencia residencia, Pessoa morador) {
+
 }

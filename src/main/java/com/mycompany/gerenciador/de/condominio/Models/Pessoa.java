@@ -5,9 +5,6 @@
 package com.mycompany.gerenciador.de.condominio.Models;
 
 /**
- *
  * @author fkdia
  */
-public class Pessoa {
-    
-}
+public record Pessoa (int id, String nome, int idade, String cpf, String rg) {}
