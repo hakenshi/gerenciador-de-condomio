@@ -31,19 +31,19 @@ public class PagamentoResidencia {
         this.statusPagamento = statusPagamento;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getId() {
+        return id;
     }
 
-    public void setIdResidencia(int idResidencia) {
-        this.idResidencia = idResidencia;
+    public int getIdResidencia() {
+        return idResidencia;
     }
 
-    public void setValorPagamento(double valorPagamento) {
-        this.valorPagamento = valorPagamento;
+    public double getValorPagamento() {
+        return valorPagamento;
     }
 
-    public void setStatusPagamento(StatusPagamento statusPagamento) {
-        this.statusPagamento = statusPagamento;
+    public StatusPagamento getStatusPagamento() {
+        return statusPagamento;
     }
 }

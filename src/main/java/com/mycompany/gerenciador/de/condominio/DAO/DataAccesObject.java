@@ -36,6 +36,8 @@ public abstract class DataAccesObject<T> {
         this.fillable = fillable;
     }
 
+
+
     private String buildQueryString(boolean isUpdating) {
         if (isUpdating) {
             var columns = Stream.of(fillable).map(f -> f + " = ?").collect(Collectors.joining(", "));
@@ -53,10 +55,6 @@ public abstract class DataAccesObject<T> {
         List<T> data = new ArrayList<>();
         ResultSet resultSet = preparedStatement.executeQuery();
 
-        if (!resultSet.next()) {
-            return null;
-        }
-
         while (resultSet.next()) {
             data.add(mapSelection(resultSet));
         }
@@ -72,7 +70,6 @@ public abstract class DataAccesObject<T> {
         if (!resultSet.next()) {
             return null;
         }
-        mapSelection(resultSet);
         return mapSelection(resultSet);
     }
 
