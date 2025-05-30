@@ -7,4 +7,5 @@ package com.mycompany.gerenciador.de.condominio.Models;
 /**
  * @author fkdia
  */
-public record Pessoa (int id, String nome, int idade, String cpf, String rg) {}
+public record Pessoa (int id, String nome, int idade, String cpf, String rg) {
+}

@@ -6,10 +6,36 @@ package com.mycompany.gerenciador.de.condominio.DAO;
 
 import com.mycompany.gerenciador.de.condominio.Models.*;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
- *
  * @author fkdia
  */
-public class PessoaDAO {
-    
+public class PessoaDAO extends DataAccesObject<Pessoa> {
+
+    public PessoaDAO() throws SQLException {
+        super("pessoas", new String[]{"nome", "idade", "rg", "cpf"});
+    }
+
+    @Override
+    protected Pessoa mapSelection(ResultSet resultSet) throws SQLException {
+        return new Pessoa(
+                resultSet.getInt("id"),
+                resultSet.getString("nome"),
+                resultSet.getInt("idade"),
+                resultSet.getString("rg"),
+                resultSet.getString("cpf")
+        );
+    }
+
+    @Override
+    protected void mapUpdate(PreparedStatement statement, Pessoa entity) throws SQLException {
+        statement.setString(1, entity.nome());
+        statement.setInt(2, entity.idade());
+        statement.setString(3, entity.rg());
+        statement.setString(4, entity.cpf());
+    }
+
 }

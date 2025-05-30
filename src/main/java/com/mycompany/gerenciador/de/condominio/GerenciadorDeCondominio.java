@@ -4,6 +4,9 @@
 
 package com.mycompany.gerenciador.de.condominio;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 /**
  *
  * @author fkdia
@@ -11,6 +14,5 @@ package com.mycompany.gerenciador.de.condominio;
 public class GerenciadorDeCondominio {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
     }
 }
