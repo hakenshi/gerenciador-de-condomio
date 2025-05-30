@@ -5,9 +5,50 @@
 package com.mycompany.gerenciador.de.condominio.Models;
 
 /**
- *
  * @author fkdia
  */
-public record Residencia (int id, String rua, String cep, int numero) {
-    
+public class Residencia {
+    int id;
+    int idPessoa;
+    String rua;
+    String cep;
+    int numero;
+
+    public Residencia() {
+    }
+
+    public Residencia(int id, int idPessoa, String rua, String cep, int numero) {
+        this.id = id;
+        this.idPessoa = idPessoa;
+        this.rua = rua;
+        this.cep = cep;
+        this.numero = numero;
+    }
+
+    public Residencia(int idPessoa, String rua, String cep, int numero) {
+        this.idPessoa = idPessoa;
+        this.rua = rua;
+        this.cep = cep;
+        this.numero = numero;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getIdPessoa() {
+        return idPessoa;
+    }
+
+    public String getRua() {
+        return rua;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
 }

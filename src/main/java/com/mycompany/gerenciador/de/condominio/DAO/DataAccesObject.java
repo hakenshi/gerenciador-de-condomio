@@ -52,6 +52,11 @@ public abstract class DataAccesObject<T> {
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         List<T> data = new ArrayList<>();
         ResultSet resultSet = preparedStatement.executeQuery();
+
+        if (!resultSet.next()) {
+            return null;
+        }
+
         while (resultSet.next()) {
             data.add(mapSelection(resultSet));
         }
@@ -67,6 +72,7 @@ public abstract class DataAccesObject<T> {
         if (!resultSet.next()) {
             return null;
         }
+        mapSelection(resultSet);
         return mapSelection(resultSet);
     }
 

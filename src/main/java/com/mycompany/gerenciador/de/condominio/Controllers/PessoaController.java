@@ -8,6 +8,7 @@ import com.mycompany.gerenciador.de.condominio.DAO.PessoaDAO;
 import com.mycompany.gerenciador.de.condominio.Models.Pessoa;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @author fkdia
@@ -16,11 +17,22 @@ public class PessoaController {
     private final PessoaDAO pessoaDAO;
 
     public PessoaController() throws SQLException {
-        this.pessoaDAO = new PessoaDAO();
+        pessoaDAO = new PessoaDAO();
     }
 
-    public Pessoa create(String nome, int idade, String cpf, String rg ) {
-        return pessoaDAO.create(new Pessoa(nome, idade, cpf, rg));
+    public List<Pessoa> findAll() throws SQLException {
+        return pessoaDAO.findAll();
     }
 
+    public Pessoa findOne(int id) throws SQLException {
+        return pessoaDAO.findOne(id);
+    }
+
+    public void create(String nome, int idade, String cpf, String rg) throws SQLException {
+        this.pessoaDAO.create(new Pessoa(nome, idade, cpf, rg));
+    }
+
+    public void update(int id, String nome, int idade, String cpf, String rg) throws SQLException {
+        this.pessoaDAO.update(new Pessoa(nome, idade, cpf, rg), id);
+    }
 }

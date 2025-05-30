@@ -32,10 +32,9 @@ public class PessoaDAO extends DataAccesObject<Pessoa> {
 
     @Override
     protected void mapUpdate(PreparedStatement statement, Pessoa entity) throws SQLException {
-        statement.setString(1, entity.nome());
-        statement.setInt(2, entity.idade());
-        statement.setString(3, entity.rg());
-        statement.setString(4, entity.cpf());
+        statement.setString(1, entity.getNome());
+        statement.setInt(2, entity.getIdade());
+        statement.setString(3, entity.getRg());
+        statement.setString(4, entity.getCpf());
     }
-
 }
