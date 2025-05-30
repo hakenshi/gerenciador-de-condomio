@@ -7,6 +7,28 @@ package com.mycompany.gerenciador.de.condominio.Models;
 /**
  * @author fkdia
  */
-public record MoradorResidencia(Pessoa proprietario, Residencia residencia, Pessoa morador) {
+public class MoradorResidencia {
+    Pessoa proprietario;
+    Residencia residencia;
+    Pessoa morador;
 
+    public MoradorResidencia() {}
+
+    public MoradorResidencia(Pessoa proprietario, Residencia residencia, Pessoa morador) {
+        this.proprietario = proprietario;
+        this.residencia = residencia;
+        this.morador = morador;
+    }
+
+    public Pessoa getProprietario() {
+        return proprietario;
+    }
+
+    public Residencia getResidencia() {
+        return residencia;
+    }
+
+    public Pessoa getMorador() {
+        return morador;
+    }
 }

@@ -7,6 +7,7 @@ package com.mycompany.gerenciador.de.condominio.Models;
 /**
  * @author fkdia
  */
+
 public class Pessoa {
     private int id;
     private String nome;
@@ -50,5 +51,16 @@ public class Pessoa {
 
     public String getRg() {
         return rg;
+    }
+
+    @Override
+    public String toString() {
+        return "Pessoa{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", idade=" + idade +
+                ", cpf='" + cpf + '\'' +
+                ", rg='" + rg + '\'' +
+                '}';
     }
 }
