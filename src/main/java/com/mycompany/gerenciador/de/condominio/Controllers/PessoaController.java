@@ -28,8 +28,8 @@ public class PessoaController {
         return pessoaDAO.findOne(id);
     }
 
-    public void create(String nome, int idade, String cpf, String rg) throws SQLException {
-        this.pessoaDAO.create(new Pessoa(nome, idade, cpf, rg));
+    public boolean create(String nome, int idade, String cpf, String rg) throws SQLException {
+        return this.pessoaDAO.create(new Pessoa(nome, idade, cpf, rg));
     }
 
     public void update(int id, String nome, int idade, String cpf, String rg) throws SQLException {

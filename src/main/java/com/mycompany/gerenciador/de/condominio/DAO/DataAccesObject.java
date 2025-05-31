@@ -73,11 +73,12 @@ public abstract class DataAccesObject<T> {
         return mapSelection(resultSet);
     }
 
-    public void create(T entity) throws SQLException {
+    public boolean create(T entity) throws SQLException {
         String query = buildQueryString(false);
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         mapUpdate(preparedStatement, entity);
-        preparedStatement.executeUpdate();
+        var affectedRows = preparedStatement.executeUpdate();
+        return affectedRows>0;
     }
 
     public void update(T entity, int id) throws SQLException {
