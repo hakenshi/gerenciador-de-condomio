@@ -31,7 +31,6 @@ public class MoradorResidenciaDAO extends DataAccesObject<MoradorResidencia> {
         Residencia residencia = residenciaController.findOne(resultSet.getInt("id_residencia"));
 
         return new MoradorResidencia(
-                proprietario,
                 residencia,
                 morador
         );
@@ -39,8 +38,7 @@ public class MoradorResidenciaDAO extends DataAccesObject<MoradorResidencia> {
 
     @Override
     protected void mapUpdate(PreparedStatement statement, MoradorResidencia entity) throws SQLException {
-        statement.setInt(1, entity.getProprietario().getId());
-        statement.setInt(2, entity.getResidencia().getId());
-        statement.setInt(3, entity.getMorador().getId());
+        statement.setInt(1, entity.getResidencia().getId());
+        statement.setInt(2, entity.getMorador().getId());
     }
 }

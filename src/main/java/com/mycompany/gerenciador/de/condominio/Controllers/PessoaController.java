@@ -27,6 +27,10 @@ public class PessoaController {
     public Pessoa findOne(int id) throws SQLException {
         return pessoaDAO.findOne(id);
     }
+    
+    public Pessoa findOne(String nome) throws SQLException {
+        return pessoaDAO.findOne(nome);
+    }
 
     public boolean create(String nome, int idade, String cpf, String rg) throws SQLException {
         return this.pessoaDAO.create(new Pessoa(nome, idade, cpf, rg));

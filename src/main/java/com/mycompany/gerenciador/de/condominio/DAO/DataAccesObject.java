@@ -72,6 +72,19 @@ public abstract class DataAccesObject<T> {
         }
         return mapSelection(resultSet);
     }
+    
+        public T findOne(String value) throws SQLException {
+        String query = "SELECT * FROM " + tableName + " WHERE nome = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, value);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        if (!resultSet.next()) {
+            return null;
+        }
+        return mapSelection(resultSet);
+    }
+
 
     public boolean create(T entity) throws SQLException {
         String query = buildQueryString(false);
