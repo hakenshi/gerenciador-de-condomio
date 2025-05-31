@@ -49,6 +49,7 @@ CREATE TABLE IF NOT EXISTS moradores_residencias
     id            INT PRIMARY KEY AUTO_INCREMENT,
     id_residencia INT,
     id_morador    INT,
+    tipo_morador  ENUM('responsavel', 'morador')
     created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (id_residencia) REFERENCES residencias (id),
