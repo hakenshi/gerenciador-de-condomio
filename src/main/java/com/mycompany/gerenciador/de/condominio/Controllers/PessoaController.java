@@ -29,7 +29,7 @@ public class PessoaController {
     }
     
     public Pessoa findOne(String nome) throws SQLException {
-        return pessoaDAO.findOne(nome);
+        return pessoaDAO.findOne(nome, "nome");
     }
 
     public boolean create(String nome, int idade, String cpf, String rg) throws SQLException {

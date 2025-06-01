@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -35,7 +36,6 @@ public abstract class DataAccesObject<T> {
         this.tableName = tableName;
         this.fillable = fillable;
     }
-
 
 
     private String buildQueryString(boolean isUpdating) {
@@ -72,9 +72,15 @@ public abstract class DataAccesObject<T> {
         }
         return mapSelection(resultSet);
     }
-    
-        public T findOne(String value) throws SQLException {
-        String query = "SELECT * FROM " + tableName + " WHERE nome = ?";
+
+    public T findOne(String value, String columnName) throws SQLException {
+
+        if (Arrays.stream(fillable).noneMatch(f -> f.equals(columnName)))
+            throw new IllegalArgumentException("No fillable columns defined for this DAO.");{
+
+        }
+
+        String query = "SELECT * FROM " + tableName + " WHERE "+ columnName + " = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, value);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -85,13 +91,12 @@ public abstract class DataAccesObject<T> {
         return mapSelection(resultSet);
     }
 
-
     public boolean create(T entity) throws SQLException {
         String query = buildQueryString(false);
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         mapUpdate(preparedStatement, entity);
         var affectedRows = preparedStatement.executeUpdate();
-        return affectedRows>0;
+        return affectedRows > 0;
     }
 
     public void update(T entity, int id) throws SQLException {
