@@ -191,7 +191,9 @@ public class CadastroResidencia extends javax.swing.JFrame {
         }
         try {
             var pessoaMorador = pc.findOne(moradorNome);
-            rc.create(pessoaMorador.getId(), rua, cep, numero);
+            if(rc.create(pessoaMorador.getId(), rua, cep, numero)){
+                JOptionPane.showMessageDialog(rootPane, "Residencia cadastrada com sucesso");
+            }
         } catch (SQLException ex) {
             Logger.getLogger(CadastroResidencia.class.getName()).log(Level.SEVERE, null, ex);
         }

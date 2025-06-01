@@ -28,8 +28,8 @@ public class ResidenciaController {
         return residenciaDAO.findOne(id);
     }
 
-    public void create(int idPessoa, String rua, String cep, int numero) throws SQLException {
-        residenciaDAO.create(new Residencia(idPessoa, rua, cep, numero));
+    public boolean create(int idPessoa, String rua, String cep, int numero) throws SQLException {
+        return residenciaDAO.create(new Residencia(idPessoa, rua, cep, numero));
     }
 
     public void update(int id, int idPessoa, String rua, String cep, int numero) throws SQLException {

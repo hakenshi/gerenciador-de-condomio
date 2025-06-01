@@ -17,6 +17,11 @@ public class Residencia {
     public Residencia() {
     }
 
+    @Override
+    public String toString() {
+        return "Residencia{" + "id=" + id + ", idPessoa=" + idPessoa + ", rua=" + rua + ", cep=" + cep + ", numero=" + numero + '}';
+    }
+
     public Residencia(int id, int idPessoa, String rua, String cep, int numero) {
         this.id = id;
         this.idPessoa = idPessoa;

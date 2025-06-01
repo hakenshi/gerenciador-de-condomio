@@ -4,17 +4,37 @@
  */
 package com.mycompany.gerenciador.de.condominio.View;
 
+import com.mycompany.gerenciador.de.condominio.Controllers.ResidenciaController;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author luis
  */
 public class ListarResidencia extends javax.swing.JFrame {
-
+    private final ResidenciaController rc;
+    private JTable table; 
     /**
      * Creates new form ListarMorador
      */
-    public ListarResidencia() {
+    public ListarResidencia() throws SQLException {
         initComponents();
+        rc = new ResidenciaController();
+        var residencias = rc.findAll();
+       
+        String[] colunas = {"Proprietario", "Numero", "Rua", "Cep"};
+        DefaultTableModel model = (DefaultTableModel)tableResidencias.getModel();
+        residencias.forEach(residencia -> {
+            model.addRow(new Object[]{residencia.getIdPessoa(), residencia.getNumero(), residencia.getRua(), residencia.getCep()});
+            System.out.println(residencia);
+        });
+        
+        table = new JTable(model);
+      
     }
 
     /**
@@ -35,7 +55,7 @@ public class ListarResidencia extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableResidencias = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -59,7 +79,7 @@ public class ListarResidencia extends javax.swing.JFrame {
 
         jLabel1.setText("LISTAR RESIDÊNCIAS");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableResidencias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -71,9 +91,9 @@ public class ListarResidencia extends javax.swing.JFrame {
                 "Proprietário", "Número", "Rua", "Cep"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
+        jScrollPane1.setViewportView(tableResidencias);
+        if (tableResidencias.getColumnModel().getColumnCount() > 0) {
+            tableResidencias.getColumnModel().getColumn(0).setResizable(false);
         }
 
         jMenu2.setText("Moradores");
@@ -168,7 +188,11 @@ public class ListarResidencia extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ListarResidencia().setVisible(true);
+                try {
+                    new ListarResidencia().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ListarResidencia.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -191,6 +215,6 @@ public class ListarResidencia extends javax.swing.JFrame {
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tableResidencias;
     // End of variables declaration//GEN-END:variables
 }
