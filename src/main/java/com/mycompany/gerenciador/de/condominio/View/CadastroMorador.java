@@ -4,6 +4,8 @@
  */
 package com.mycompany.gerenciador.de.condominio.View;
 
+import br.com.caelum.stella.validation.CPFValidator;
+import com.mycompany.gerenciador.de.condominio.Adapters.CPFAdapter;
 import com.mycompany.gerenciador.de.condominio.Controllers.PessoaController;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -189,7 +191,12 @@ public class CadastroMorador extends javax.swing.JFrame {
         int idade = Integer.parseInt(idadePessoa.getText());
         String cpf = cpfPessoa.getText();
         String rg = rgPessoa.getText();
+        CPFAdapter validator = new CPFAdapter(cpf);
         try {
+            if(!validator.validateCpf()){
+             JOptionPane.showMessageDialog(rootPane, "Este CPF não é válido.");
+            return;
+            }    
             if(nome.isEmpty() || idadePessoa.getText().isEmpty() || cpf.isEmpty() || rg.isEmpty()){
                 JOptionPane.showMessageDialog(rootPane, "Nao é possivel cadastrar com informações nulas");
                 return;
@@ -200,6 +207,7 @@ public class CadastroMorador extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(rootPane, "Erro Ao Cadastrar");
         }
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
