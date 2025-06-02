@@ -15,9 +15,16 @@ import java.util.List;
  * @author fkdia
  */
 public class MoradorResidenciaController {
+
     private final MoradorResidenciaDAO moradorResidenciaDAO;
+    private final PessoaController pc;
+
+    private final ResidenciaController rc;
+
     public MoradorResidenciaController() throws SQLException {
         this.moradorResidenciaDAO = new MoradorResidenciaDAO();
+        pc = new PessoaController();
+        rc = new ResidenciaController();
     }
 
     public List<MoradorResidencia> listar() throws SQLException {
@@ -28,8 +35,14 @@ public class MoradorResidenciaController {
         return moradorResidenciaDAO.findOne(id);
     }
 
-    public void create(MoradorResidencia moradorResidencia) throws SQLException {
-        moradorResidenciaDAO.create(moradorResidencia);
+    public void create(String residencia, String morador) throws SQLException {
+
+        var novoMorardor = new MoradorResidencia();
+
+        int pessoaId = Integer.parseInt(morador.split(",")[0]);
+        int residenciaId = Integer.parseInt(residencia.split(",")[0]);
+
+        moradorResidenciaDAO.create(new MoradorResidencia(rc.findOne(residenciaId).getId(), pc.findOne(pessoaId).getId()));
     }
 
     public void update(MoradorResidencia moradorResidencia, int id) throws SQLException {

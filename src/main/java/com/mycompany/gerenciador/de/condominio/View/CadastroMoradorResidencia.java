@@ -5,32 +5,41 @@
 package com.mycompany.gerenciador.de.condominio.View;
 
 import com.mycompany.gerenciador.de.condominio.Controllers.MoradorResidenciaController;
+import com.mycompany.gerenciador.de.condominio.Controllers.PessoaController;
 import com.mycompany.gerenciador.de.condominio.Controllers.ResidenciaController;
 import static java.lang.String.format;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author 9gxbv
  */
 public class CadastroMoradorResidencia extends javax.swing.JFrame {
+
     private final ResidenciaController rc;
     private final MoradorResidenciaController mrc;
+    private final PessoaController pc;
+
     /**
      * Creates new form CadastroMoradorResidencia
      */
     public CadastroMoradorResidencia() throws SQLException {
-       initComponents();
+        initComponents();
         rc = new ResidenciaController();
         mrc = new MoradorResidenciaController();
+        pc = new PessoaController();
         var residencias = rc.findAll();
-        residencias.forEach(residencia ->{
-            moradorResidenciaCombox.addItem(String.format("%s, %s, %s", residencia.getRua(), residencia.getCep(), residencia.getNumero()));
+        residencias.forEach(residencia -> {
+            residenciaCombobox.addItem(String.format("%d, %s, %s, %s", residencia.getId(), residencia.getRua(), residencia.getCep(), residencia.getNumero()));
         });
-       
+        var pessoas = pc.findAll();
+
+        pessoas.forEach(pessoa -> {
+            moradorComboBox.addItem(String.format("%d, %s", pessoa.getId(), pessoa.getNome()));
+        });
     }
 
     /**
@@ -43,14 +52,15 @@ public class CadastroMoradorResidencia extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        moradorResidenciaCombox = new javax.swing.JComboBox<>();
+        residenciaCombobox = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        moradorComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        moradorResidenciaCombox.addActionListener(new java.awt.event.ActionListener() {
+        residenciaCombobox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                moradorResidenciaComboxActionPerformed(evt);
+                residenciaComboboxActionPerformed(evt);
             }
         });
 
@@ -61,6 +71,12 @@ public class CadastroMoradorResidencia extends javax.swing.JFrame {
             }
         });
 
+        moradorComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                moradorComboBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -68,19 +84,23 @@ public class CadastroMoradorResidencia extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(moradorResidenciaCombox, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(98, 98, 98)
-                        .addComponent(jButton1)))
+                        .addComponent(jButton1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(moradorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(residenciaCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(moradorResidenciaCombox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
+                .addComponent(residenciaCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(moradorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(54, 54, 54))
         );
@@ -105,13 +125,27 @@ public class CadastroMoradorResidencia extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void moradorResidenciaComboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moradorResidenciaComboxActionPerformed
-        moradorResidenciaCombox.setEditable(true);
-    }//GEN-LAST:event_moradorResidenciaComboxActionPerformed
+    private void residenciaComboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_residenciaComboboxActionPerformed
+        residenciaCombobox.setEditable(true);
+    }//GEN-LAST:event_residenciaComboboxActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       //PEGAR AS INFOS E COLOCAR NO BANCO
+        //PEGAR AS INFOS E COLOCAR NO BANCO
+        String morador = moradorComboBox.getSelectedItem().toString();
+        String residencia = residenciaCombobox.getSelectedItem().toString();
+        
+        try {
+           mrc.create(residencia, morador);
+            JOptionPane.showMessageDialog(rootPane, "Morador atribuído a residência com sucesso.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Algo deu errado ao tentar atribuir um morador a residência.");
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void moradorComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moradorComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_moradorComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,6 +189,7 @@ public class CadastroMoradorResidencia extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JComboBox<String> moradorResidenciaCombox;
+    private javax.swing.JComboBox<String> moradorComboBox;
+    private javax.swing.JComboBox<String> residenciaCombobox;
     // End of variables declaration//GEN-END:variables
 }

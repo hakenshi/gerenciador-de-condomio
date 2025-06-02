@@ -8,21 +8,24 @@ package com.mycompany.gerenciador.de.condominio.Models;
  * @author fkdia
  */
 public class MoradorResidencia {
-    Residencia residencia;
-    Pessoa morador;
 
-    public MoradorResidencia() {}
+    int residenciaId;
+    int moradorId;
 
-    public MoradorResidencia(Residencia residencia, Pessoa morador) {
-        this.residencia = residencia;
-        this.morador = morador;
+    public MoradorResidencia() {
     }
 
-    public Residencia getResidencia() {
-        return residencia;
+    public MoradorResidencia(int residenciaId, int moradorId) {
+        this.residenciaId = residenciaId;
+        this.moradorId = moradorId;
     }
 
-    public Pessoa getMorador() {
-        return morador;
+    public int getResidenciaId() {
+        return residenciaId;
     }
+
+    public int getMoradorId() {
+        return moradorId;
+    }
+
 }
