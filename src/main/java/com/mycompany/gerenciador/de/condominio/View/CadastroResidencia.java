@@ -60,6 +60,16 @@ public class CadastroResidencia extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         moradorCombox = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        cadMorador = new javax.swing.JMenuItem();
+        ListMorador = new javax.swing.JMenuItem();
+        AtuMorador = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        CadResidencia = new javax.swing.JMenuItem();
+        ListResidencia = new javax.swing.JMenuItem();
+        AtuResidencia = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -150,6 +160,37 @@ public class CadastroResidencia extends javax.swing.JFrame {
 
         jLabel5.setText("CADASTRO RESIDENCIA");
 
+        jMenu1.setText("Moradores");
+
+        cadMorador.setText("Cadastrar");
+        jMenu1.add(cadMorador);
+
+        ListMorador.setText("Listar");
+        jMenu1.add(ListMorador);
+
+        AtuMorador.setText("Atualizar");
+        jMenu1.add(AtuMorador);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Residencias");
+
+        CadResidencia.setText("Cadastrar");
+        jMenu2.add(CadResidencia);
+
+        ListResidencia.setText("Listar");
+        jMenu2.add(ListResidencia);
+
+        AtuResidencia.setText("Atualizar");
+        jMenu2.add(AtuResidencia);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Pagamentos");
+        jMenuBar1.add(jMenu3);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -174,7 +215,7 @@ public class CadastroResidencia extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
@@ -244,6 +285,12 @@ public class CadastroResidencia extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem AtuMorador;
+    private javax.swing.JMenuItem AtuResidencia;
+    private javax.swing.JMenuItem CadResidencia;
+    private javax.swing.JMenuItem ListMorador;
+    private javax.swing.JMenuItem ListResidencia;
+    private javax.swing.JMenuItem cadMorador;
     private javax.swing.JTextField cepMorador;
     private javax.swing.JTextField endereco;
     private javax.swing.JButton jButton1;
@@ -252,6 +299,10 @@ public class CadastroResidencia extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JComboBox<String> moradorCombox;
