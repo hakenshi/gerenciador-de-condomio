@@ -27,6 +27,10 @@ public class ResidenciaController {
     public Residencia findOne(int id) throws SQLException {
         return residenciaDAO.findOne(id);
     }
+    
+    public Residencia findOne(int numero, String cep, String rua) throws SQLException {
+        return residenciaDAO.findOne(numero,cep,rua);
+    }
 
     public Residencia create(int idPessoa, String rua, String cep, int numero) throws SQLException {
         return residenciaDAO.createAndReturn(new Residencia(idPessoa, rua, cep, numero));

@@ -60,6 +60,19 @@ public abstract class DataAccesObject<T> {
         }
         return data;
     }
+    
+    public List<T> findAll(int id) throws SQLException {
+        String query = "SELECT * FROM " + tableName + " WHERE id_residencia = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, id);
+        List<T> data = new ArrayList<>();
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            data.add(mapSelection(resultSet));
+        }
+        return data;
+    }
 
     public T findOne(int id) throws SQLException {
         String query = "SELECT * FROM " + tableName + " WHERE id = ?";
@@ -92,6 +105,28 @@ public abstract class DataAccesObject<T> {
         }
         return mapSelection(resultSet);
     }
+    
+    public T findOne(int numero, String cep, String rua) throws SQLException {
+        
+        if (!(Arrays.asList(fillable).containsAll(Arrays.asList("numero", "cep", "rua")))) {
+            throw new IllegalArgumentException("One or more columns are not allowed in this DAO.");
+        }
+
+        String query = "SELECT * FROM " + tableName + " WHERE numero = ? AND cep = ? AND rua = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, numero);
+        preparedStatement.setString(2, cep);
+        preparedStatement.setString(3, rua);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        if (!resultSet.next()) {
+            return null;
+        }
+
+        return mapSelection(resultSet);
+    }
+
 
     public boolean create(T entity) throws SQLException {
         String query = buildQueryString(false);

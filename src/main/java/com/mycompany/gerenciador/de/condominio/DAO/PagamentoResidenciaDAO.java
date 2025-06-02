@@ -10,6 +10,8 @@ import com.mycompany.gerenciador.de.condominio.Models.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /**
  * @author fkdia
@@ -22,11 +24,14 @@ public class PagamentoResidenciaDAO extends DataAccesObject<PagamentoResidencia>
 
     @Override
     protected PagamentoResidencia mapSelection(ResultSet resultSet) throws SQLException {
+        Timestamp ts = resultSet.getTimestamp("created_at");
+        LocalDateTime dataCriacao = (ts != null) ? ts.toLocalDateTime() : null;
         return new PagamentoResidencia(
                 resultSet.getInt("id"),
-                resultSet.getInt("id_redisencia"),
+                resultSet.getInt("id_residencia"),
                 resultSet.getDouble("valor_pagamento"),
-                StatusPagamento.valueOf(resultSet.getString("status_pagamento").toUpperCase())
+                StatusPagamento.valueOf(resultSet.getString("status_pagamento").toUpperCase()),
+                dataCriacao
         );
     }
 

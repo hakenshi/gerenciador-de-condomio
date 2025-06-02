@@ -24,6 +24,10 @@ public class PagamentoResidenciaController {
     public List<PagamentoResidencia> fidnAll() throws SQLException {
         return pagamentoResidenciaDAO.findAll();
     }
+    
+    public List<PagamentoResidencia> fidnAll(int id) throws SQLException {
+        return pagamentoResidenciaDAO.findAll(id);
+    }
 
     public PagamentoResidencia findOne(int id) throws SQLException {
         return pagamentoResidenciaDAO.findOne(id);

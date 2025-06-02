@@ -4,16 +4,29 @@
  */
 package com.mycompany.gerenciador.de.condominio.View;
 
+import com.mycompany.gerenciador.de.condominio.Controllers.PagamentoResidenciaController;
+import com.mycompany.gerenciador.de.condominio.Controllers.ResidenciaController;
+import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author luis
  */
 public class Pagamentos extends javax.swing.JFrame {
-
+    private final ResidenciaController rc;
+    private final PagamentoResidenciaController prc;
+    private JTable table;
     /**
      * Creates new form Pagamentos
      */
-    public Pagamentos() {
+    public Pagamentos() throws SQLException {
+        rc = new ResidenciaController();
+        prc = new PagamentoResidenciaController();
         initComponents();
     }
 
@@ -34,7 +47,7 @@ public class Pagamentos extends javax.swing.JFrame {
         ruaResidencia = new javax.swing.JTextField();
         buscarBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablePagamento = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuMorador = new javax.swing.JMenu();
         cadMorador = new javax.swing.JMenuItem();
@@ -65,18 +78,18 @@ public class Pagamentos extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablePagamento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Endereço", "Mês", "Valor", "Status"
+                "Status", "Valor", "Data"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablePagamento);
 
         menuMorador.setText("Morador");
 
@@ -160,7 +173,23 @@ public class Pagamentos extends javax.swing.JFrame {
     }//GEN-LAST:event_numResidenciaActionPerformed
 
     private void buscarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarBtnActionPerformed
-        // TODO add your handling code here:
+        int numero = Integer.parseInt(numResidencia.getText());
+        String cep = cepResidencia.getText();
+        String rua = ruaResidencia.getText();
+        DefaultTableModel model = (DefaultTableModel)tablePagamento.getModel();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        try {
+            var residencia = rc.findOne(numero, cep, rua);
+            var pagamentos = prc.fidnAll(residencia.getId());
+            pagamentos.forEach(pagamento -> {
+                String dataFormatada = pagamento.getData() != null ? pagamento.getData().format(formatter) : "";
+                model.addRow(new Object[]{pagamento.getStatusPagamento(), pagamento.getValorPagamento(), dataFormatada});
+            });
+            
+            table = new JTable(model);
+        } catch (SQLException ex) {
+            Logger.getLogger(Pagamentos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buscarBtnActionPerformed
 
     /**
@@ -193,7 +222,11 @@ public class Pagamentos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Pagamentos().setVisible(true);
+                try {
+                    new Pagamentos().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Pagamentos.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -207,7 +240,6 @@ public class Pagamentos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JMenuItem listMorador;
     private javax.swing.JMenuItem listarResidencia;
     private javax.swing.JMenu menuMorador;
@@ -215,6 +247,7 @@ public class Pagamentos extends javax.swing.JFrame {
     private javax.swing.JMenu menuResidencia;
     private javax.swing.JTextField numResidencia;
     private javax.swing.JTextField ruaResidencia;
+    private javax.swing.JTable tablePagamento;
     private javax.swing.JLabel textceo;
     // End of variables declaration//GEN-END:variables
 }
