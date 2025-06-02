@@ -20,6 +20,11 @@ public class MoradorResidencia {
         this.moradorId = moradorId;
     }
 
+    @Override
+    public String toString() {
+        return "MoradorResidencia{" + "residenciaId=" + residenciaId + ", moradorId=" + moradorId + '}';
+    }
+
     public int getResidenciaId() {
         return residenciaId;
     }

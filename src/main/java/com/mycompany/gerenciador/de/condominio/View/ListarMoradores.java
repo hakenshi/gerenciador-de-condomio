@@ -4,17 +4,50 @@
  */
 package com.mycompany.gerenciador.de.condominio.View;
 
+import com.mycompany.gerenciador.de.condominio.Controllers.MoradorResidenciaController;
+import com.mycompany.gerenciador.de.condominio.Controllers.PessoaController;
+import com.mycompany.gerenciador.de.condominio.Controllers.ResidenciaController;
+import com.mycompany.gerenciador.de.condominio.Models.Pessoa;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author luis
  */
 public class ListarMoradores extends javax.swing.JFrame {
 
+    private final ResidenciaController rc;
+    private final PessoaController pc;
+    private final MoradorResidenciaController mrc;
+    private JTable table;
+
     /**
      * Creates new form ListarMoradores
      */
-    public ListarMoradores() {
+    public ListarMoradores() throws SQLException {
+        rc = new ResidenciaController();
+        pc = new PessoaController();
+        mrc = new MoradorResidenciaController();
         initComponents();
+        DefaultTableModel model = (DefaultTableModel) tableMoradoresResidencia.getModel();
+        model.setRowCount(0);
+        var moradorResidencia = pc.findAll();
+        List<Pessoa> moradoresR = new ArrayList<>();
+        for (var moradorR : moradorResidencia) {
+            moradoresR.add(pc.findOne(moradorR.getId()));
+        }
+
+        moradoresR.forEach(morador -> {
+            model.addRow(new Object[]{morador.getNome(), morador.getRg(), morador.getIdade()});
+        });
+        table = new JTable(model);
+
     }
 
     /**
@@ -28,16 +61,16 @@ public class ListarMoradores extends javax.swing.JFrame {
 
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableMoradoresResidencia = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        NumResidencia = new javax.swing.JTextField();
+        cepResidencia = new javax.swing.JTextField();
         buscarbtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        RuaResidencia = new javax.swing.JTextField();
-        CepResidencia = new javax.swing.JTextField();
+        ruaResidencia = new javax.swing.JTextField();
+        numResidencia = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         cadMorador = new javax.swing.JMenuItem();
@@ -49,7 +82,7 @@ public class ListarMoradores extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableMoradoresResidencia.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -60,11 +93,11 @@ public class ListarMoradores extends javax.swing.JFrame {
                 "Nome", "CPF", "Idade"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableMoradoresResidencia);
 
-        NumResidencia.addActionListener(new java.awt.event.ActionListener() {
+        cepResidencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NumResidenciaActionPerformed(evt);
+                cepResidenciaActionPerformed(evt);
             }
         });
 
@@ -124,17 +157,17 @@ public class ListarMoradores extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(RuaResidencia))
+                                .addComponent(ruaResidencia))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(CepResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(numResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(NumResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(cepResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(51, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -154,11 +187,11 @@ public class ListarMoradores extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel3)
                     .addComponent(jLabel5)
-                    .addComponent(CepResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NumResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(numResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cepResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(RuaResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ruaResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(buscarbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,12 +204,31 @@ public class ListarMoradores extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buscarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarbtnActionPerformed
-        // TODO add your handling code here:
+        int numero = Integer.parseInt(numResidencia.getText());
+        String cep = cepResidencia.getText();
+        String rua = ruaResidencia.getText();
+        DefaultTableModel model = (DefaultTableModel) tableMoradoresResidencia.getModel();
+        model.setRowCount(0);
+        try {
+            var residencia = rc.findOne(numero, cep, rua);
+            var moradorResidencia = mrc.findAll(residencia.getId());
+            List<Pessoa> moradoresR = new ArrayList<>();
+            for (var moradorR : moradorResidencia) {
+                moradoresR.add(pc.findOne(moradorR.getMoradorId()));
+            }
+            moradoresR.forEach(morador -> {
+                model.addRow(new Object[]{morador.getNome(), morador.getRg(), morador.getIdade()});
+            });
+            table = new JTable(model);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ListarMoradores.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buscarbtnActionPerformed
 
-    private void NumResidenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NumResidenciaActionPerformed
+    private void cepResidenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cepResidenciaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_NumResidenciaActionPerformed
+    }//GEN-LAST:event_cepResidenciaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,18 +260,20 @@ public class ListarMoradores extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ListarMoradores().setVisible(true);
+                try {
+                    new ListarMoradores().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ListarMoradores.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField CepResidencia;
-    private javax.swing.JTextField NumResidencia;
-    private javax.swing.JTextField RuaResidencia;
     private javax.swing.JButton buscarbtn;
     private javax.swing.JMenuItem cadMorador;
     private javax.swing.JMenuItem cadResidencia;
+    private javax.swing.JTextField cepResidencia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -231,8 +285,10 @@ public class ListarMoradores extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JMenuItem lisMorador;
     private javax.swing.JMenuItem listResidencia;
+    private javax.swing.JTextField numResidencia;
+    private javax.swing.JTextField ruaResidencia;
+    private javax.swing.JTable tableMoradoresResidencia;
     // End of variables declaration//GEN-END:variables
 }

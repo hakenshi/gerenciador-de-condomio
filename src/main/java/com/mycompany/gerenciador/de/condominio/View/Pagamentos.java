@@ -177,6 +177,7 @@ public class Pagamentos extends javax.swing.JFrame {
         String cep = cepResidencia.getText();
         String rua = ruaResidencia.getText();
         DefaultTableModel model = (DefaultTableModel)tablePagamento.getModel();
+        model.setRowCount(0);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         try {
             var residencia = rc.findOne(numero, cep, rua);

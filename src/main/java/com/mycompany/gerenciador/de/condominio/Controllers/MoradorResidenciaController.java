@@ -30,6 +30,10 @@ public class MoradorResidenciaController {
     public List<MoradorResidencia> listar() throws SQLException {
         return moradorResidenciaDAO.findAll();
     }
+    
+    public List<MoradorResidencia> findAll(int id) throws SQLException {
+        return moradorResidenciaDAO.findAll(id);
+    }
 
     public MoradorResidencia findOne(int id) throws SQLException {
         return moradorResidenciaDAO.findOne(id);

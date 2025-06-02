@@ -28,9 +28,9 @@ public class ListarResidencia extends javax.swing.JFrame {
        
         String[] colunas = {"Proprietario", "Numero", "Rua", "Cep"};
         DefaultTableModel model = (DefaultTableModel)tableResidencias.getModel();
+        model.setRowCount(0);
         residencias.forEach(residencia -> {
             model.addRow(new Object[]{residencia.getIdPessoa(), residencia.getNumero(), residencia.getRua(), residencia.getCep()});
-            System.out.println(residencia);
         });
         
         table = new JTable(model);
