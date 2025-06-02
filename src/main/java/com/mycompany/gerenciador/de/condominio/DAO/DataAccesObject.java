@@ -155,18 +155,18 @@ public abstract class DataAccesObject<T> {
         }
     }
 
-    public void update(T entity, int id) throws SQLException {
+    public boolean update(T entity, int id) throws SQLException {
         String query = buildQueryString(true) + " WHERE id = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         mapUpdate(preparedStatement, entity);
         preparedStatement.setInt(fillable.length + 1, id);
-        preparedStatement.executeUpdate();
+        return preparedStatement.executeUpdate() > 0;
     }
 
-    public void delete(int id) throws SQLException {
+    public boolean delete(int id) throws SQLException {
         String query = "DELETE FROM " + tableName + " WHERE id = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setInt(1, id);
-        preparedStatement.executeUpdate();
+        return preparedStatement.executeUpdate() > 0;
     }
 }

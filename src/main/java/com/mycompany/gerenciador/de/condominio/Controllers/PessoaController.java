@@ -14,6 +14,7 @@ import java.util.List;
  * @author fkdia
  */
 public class PessoaController {
+
     private final PessoaDAO pessoaDAO;
 
     public PessoaController() throws SQLException {
@@ -27,16 +28,20 @@ public class PessoaController {
     public Pessoa findOne(int id) throws SQLException {
         return pessoaDAO.findOne(id);
     }
-    
+
     public Pessoa findOne(String nome) throws SQLException {
         return pessoaDAO.findOne(nome, "nome");
+    }
+
+    public Pessoa findOne(String value, String columnName) throws SQLException {
+        return pessoaDAO.findOne(value, columnName);
     }
 
     public boolean create(String nome, int idade, String cpf, String rg) throws SQLException {
         return this.pessoaDAO.create(new Pessoa(nome, idade, cpf, rg));
     }
 
-    public void update(int id, String nome, int idade, String cpf, String rg) throws SQLException {
-        this.pessoaDAO.update(new Pessoa(nome, idade, cpf, rg), id);
+    public boolean update(int id, String nome, int idade, String cpf, String rg) throws SQLException {
+        return this.pessoaDAO.update(new Pessoa(nome, idade, cpf, rg), id);
     }
 }

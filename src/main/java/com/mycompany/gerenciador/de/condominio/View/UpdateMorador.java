@@ -4,16 +4,26 @@
  */
 package com.mycompany.gerenciador.de.condominio.View;
 
+import com.mycompany.gerenciador.de.condominio.Adapters.CPFAdapter;
+import com.mycompany.gerenciador.de.condominio.Controllers.PessoaController;
+
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
- *
  * @author luis
  */
 public class UpdateMorador extends javax.swing.JFrame {
 
+    private final PessoaController pessoaController;
+
     /**
      * Creates new form UpdateMorador
      */
-    public UpdateMorador() {
+    public UpdateMorador() throws SQLException {
+        pessoaController = new PessoaController();
         initComponents();
     }
 
@@ -27,14 +37,13 @@ public class UpdateMorador extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        busCPF = new javax.swing.JTextField();
-        buscBtn = new javax.swing.JButton();
+        cpfInput = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        nomeMorador = new javax.swing.JTextField();
-        idadeMorador = new javax.swing.JTextField();
-        rgMorador = new javax.swing.JTextField();
+        nomeInput = new javax.swing.JTextField();
+        idadeInput = new javax.swing.JTextField();
+        rgInput = new javax.swing.JTextField();
         btnAtualizar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -51,13 +60,11 @@ public class UpdateMorador extends javax.swing.JFrame {
 
         jLabel1.setText("CPF:");
 
-        busCPF.addActionListener(new java.awt.event.ActionListener() {
+        cpfInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                busCPFActionPerformed(evt);
+                cpfInputActionPerformed(evt);
             }
         });
-
-        buscBtn.setText("Buscar");
 
         jLabel2.setText("Nome:");
 
@@ -65,13 +72,18 @@ public class UpdateMorador extends javax.swing.JFrame {
 
         jLabel4.setText("RG:");
 
-        nomeMorador.addActionListener(new java.awt.event.ActionListener() {
+        nomeInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomeMoradorActionPerformed(evt);
+                nomeInputActionPerformed(evt);
             }
         });
 
         btnAtualizar.setText("Atualizar");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("Morador");
 
@@ -116,27 +128,24 @@ public class UpdateMorador extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(159, 159, 159)
-                        .addComponent(buscBtn))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(nomeMorador, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(nomeInput, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(busCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cpfInput))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(idadeMorador))
+                                .addComponent(idadeInput))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(rgMorador, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(rgInput))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(155, 155, 155)
                         .addComponent(btnAtualizar)))
@@ -148,24 +157,22 @@ public class UpdateMorador extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(busCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(buscBtn)
-                .addGap(18, 18, 18)
+                    .addComponent(cpfInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(nomeMorador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nomeInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(idadeMorador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(idadeInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(rgMorador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(rgInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnAtualizar)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         pack();
@@ -175,13 +182,54 @@ public class UpdateMorador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ListMoradorActionPerformed
 
-    private void busCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_busCPFActionPerformed
+    private void cpfInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfInputActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_busCPFActionPerformed
+    }//GEN-LAST:event_cpfInputActionPerformed
 
-    private void nomeMoradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeMoradorActionPerformed
+    private void nomeInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeInputActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nomeMoradorActionPerformed
+    }//GEN-LAST:event_nomeInputActionPerformed
+
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        String cpf = cpfInput.getText();
+        String nome = nomeInput.getText();
+        String idade = idadeInput.getText();
+        String rg = idadeInput.getText();
+
+        CPFAdapter adapter = new CPFAdapter(cpf);
+        try {
+
+            if (!adapter.validateCpf()) {
+                JOptionPane.showMessageDialog(rootPane, "Cpf inválido");
+                return;
+            }
+
+            var pessoaToUpdate = pessoaController.findOne(cpf, "cpf");
+
+            if (pessoaToUpdate == null) {
+                JOptionPane.showMessageDialog(null, "Pessoa não encontrada.");
+                return;
+            }
+
+            if (cpf == null || cpf.isBlank()
+                    || nome == null || nome.isBlank()
+                    || idade == null || idade.isBlank()
+                    || rg == null || rg.isBlank()) {
+
+                JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.");
+                return;
+            }
+
+            var updatedPessoa = pessoaController.update(pessoaToUpdate.getId(), nome, Integer.parseInt(idade), cpf, rg);
+            if (updatedPessoa) {
+                JOptionPane.showMessageDialog(rootPane, pessoaToUpdate.getNome() + "Foi atualizado com sucesso.");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao tentar atualizar essa pessoa.");
+            return;
+        }
+
+    }//GEN-LAST:event_btnAtualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,7 +238,7 @@ public class UpdateMorador extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -213,7 +261,11 @@ public class UpdateMorador extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UpdateMorador().setVisible(true);
+                try {
+                    new UpdateMorador().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(UpdateMorador.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -225,10 +277,9 @@ public class UpdateMorador extends javax.swing.JFrame {
     private javax.swing.JMenuItem ListMorador;
     private javax.swing.JMenuItem ListResidencia;
     private javax.swing.JButton btnAtualizar;
-    private javax.swing.JTextField busCPF;
-    private javax.swing.JButton buscBtn;
     private javax.swing.JMenuItem cadMorador;
-    private javax.swing.JTextField idadeMorador;
+    private javax.swing.JTextField cpfInput;
+    private javax.swing.JTextField idadeInput;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -237,7 +288,7 @@ public class UpdateMorador extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JTextField nomeMorador;
-    private javax.swing.JTextField rgMorador;
+    private javax.swing.JTextField nomeInput;
+    private javax.swing.JTextField rgInput;
     // End of variables declaration//GEN-END:variables
 }

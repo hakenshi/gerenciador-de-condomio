@@ -5,8 +5,10 @@
 package com.mycompany.gerenciador.de.condominio.View;
 
 import com.mycompany.gerenciador.de.condominio.Controllers.MoradorResidenciaController;
+import com.mycompany.gerenciador.de.condominio.Controllers.PagamentoResidenciaController;
 import com.mycompany.gerenciador.de.condominio.Controllers.PessoaController;
 import com.mycompany.gerenciador.de.condominio.Controllers.ResidenciaController;
+import com.mycompany.gerenciador.de.condominio.Enums.StatusPagamento;
 import com.mycompany.gerenciador.de.condominio.Models.Pessoa;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -18,12 +20,21 @@ import javax.swing.JOptionPane;
  * @author 9gxbv
  */
 public class UpdateResidencia extends javax.swing.JFrame {
-   
+
+    private final PessoaController pc;
+    private final MoradorResidenciaController mrc;
+    private final ResidenciaController rc;
+    private final PagamentoResidenciaController pagamentoResidenciaController;
+
     /**
      * Creates new form CadastroResidencia
      */
     public UpdateResidencia() throws SQLException {
-   
+        pc = new PessoaController();
+        mrc = new MoradorResidenciaController();
+        rc = new ResidenciaController();
+        pagamentoResidenciaController = new PagamentoResidenciaController();
+        initComponents();
     }
 
     /**
@@ -35,51 +46,103 @@ public class UpdateResidencia extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        endereco = new javax.swing.JTextField();
+        cepMorador = new javax.swing.JTextField();
+        numeroMorador = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        nomeProprietario = new javax.swing.JTextField();
-        btnBuscar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        btnAtualizar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        CadMorador = new javax.swing.JMenuItem();
+        cadMorador = new javax.swing.JMenuItem();
         ListMorador = new javax.swing.JMenuItem();
         AtuMorador = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        cadResidencia = new javax.swing.JMenuItem();
+        CadResidencia = new javax.swing.JMenuItem();
         ListResidencia = new javax.swing.JMenuItem();
         AtuResidencia = new javax.swing.JMenuItem();
-        MenuPagamento = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel2.setText("Rua");
+
+        jLabel3.setText("Cep");
+
+        jLabel4.setText("Numero");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel4))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))))
+                .addContainerGap(44, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
+
+        jButton1.setText("Cadastrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cepMorador)
+                    .addComponent(endereco)
+                    .addComponent(numeroMorador)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(cepMorador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(numeroMorador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(11, Short.MAX_VALUE))
+        );
+
         jLabel5.setText("ATUALIZAR RESIDENCIA");
 
-        jLabel6.setText("Proprietário:");
+        jMenu1.setText("Moradores");
 
-        btnBuscar.setText("Buscar");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Número", "Rua", "CEP"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        btnAtualizar.setText("Atualizar");
-
-        jMenu1.setText("Morador");
-
-        CadMorador.setText("Cadastrar");
-        jMenu1.add(CadMorador);
+        cadMorador.setText("Cadastrar");
+        jMenu1.add(cadMorador);
 
         ListMorador.setText("Listar");
         jMenu1.add(ListMorador);
@@ -89,10 +152,10 @@ public class UpdateResidencia extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Residência");
+        jMenu2.setText("Residencias");
 
-        cadResidencia.setText("Cadastrar");
-        jMenu2.add(cadResidencia);
+        CadResidencia.setText("Cadastrar");
+        jMenu2.add(CadResidencia);
 
         ListResidencia.setText("Listar");
         jMenu2.add(ListResidencia);
@@ -102,8 +165,8 @@ public class UpdateResidencia extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        MenuPagamento.setText("Pagamentos");
-        jMenuBar1.add(MenuPagamento);
+        jMenu3.setText("Pagamentos");
+        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
@@ -111,46 +174,54 @@ public class UpdateResidencia extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
-                .addGap(174, 174, 174))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nomeProprietario, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnBuscar))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(210, 210, 210)
-                        .addComponent(btnAtualizar)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGap(134, 134, 134))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(13, 13, 13)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(nomeProprietario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAtualizar)
-                .addGap(37, 37, 37))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String rua = endereco.getText();
+        String cep = cepMorador.getText();
+        int numero = Integer.parseInt(numeroMorador.getText());
+
+        if (rua.isEmpty() || cep.isEmpty() || numeroMorador.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Informações nulas não são permitidas");
+            return;
+        }
+        try {
+            var residencia = rc.findOne(numero, cep, rua);
+
+            if (residencia == null) {
+                JOptionPane.showMessageDialog(rootPane, "Informações nulas não são permitidas");
+                return;
+            }
+            rc.update(residencia.getId(), residencia.getIdPessoa(), rua, cep, numero);
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateResidencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,20 +266,23 @@ public class UpdateResidencia extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem AtuMorador;
     private javax.swing.JMenuItem AtuResidencia;
-    private javax.swing.JMenuItem CadMorador;
+    private javax.swing.JMenuItem CadResidencia;
     private javax.swing.JMenuItem ListMorador;
     private javax.swing.JMenuItem ListResidencia;
-    private javax.swing.JMenu MenuPagamento;
-    private javax.swing.JButton btnAtualizar;
-    private javax.swing.JButton btnBuscar;
-    private javax.swing.JMenuItem cadResidencia;
+    private javax.swing.JMenuItem cadMorador;
+    private javax.swing.JTextField cepMorador;
+    private javax.swing.JTextField endereco;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField nomeProprietario;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField numeroMorador;
     // End of variables declaration//GEN-END:variables
 }
