@@ -45,6 +45,7 @@ public class UpdateMorador extends javax.swing.JFrame {
         idadeInput = new javax.swing.JTextField();
         rgInput = new javax.swing.JTextField();
         btnAtualizar = new javax.swing.JButton();
+        searchButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         cadMorador = new javax.swing.JMenuItem();
@@ -82,6 +83,13 @@ public class UpdateMorador extends javax.swing.JFrame {
         btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAtualizarActionPerformed(evt);
+            }
+        });
+
+        searchButton.setText("Buscar");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
             }
         });
 
@@ -145,11 +153,13 @@ public class UpdateMorador extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(rgInput))))
+                                .addComponent(rgInput)))
+                        .addGap(18, 18, 18)
+                        .addComponent(searchButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(155, 155, 155)
                         .addComponent(btnAtualizar)))
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,8 +167,9 @@ public class UpdateMorador extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(cpfInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                    .addComponent(cpfInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchButton))
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(nomeInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -194,7 +205,7 @@ public class UpdateMorador extends javax.swing.JFrame {
         String cpf = cpfInput.getText();
         String nome = nomeInput.getText();
         String idade = idadeInput.getText();
-        String rg = idadeInput.getText();
+        String rg = rgInput.getText();
 
         CPFAdapter adapter = new CPFAdapter(cpf);
         try {
@@ -205,12 +216,14 @@ public class UpdateMorador extends javax.swing.JFrame {
             }
 
             var pessoaToUpdate = pessoaController.findOne(cpf, "cpf");
-
+            nomeInput.setText(pessoaToUpdate.getNome());
+            idadeInput.setText(String.valueOf(pessoaToUpdate.getIdade()));
+            rgInput.setText(pessoaToUpdate.getCpf());
             if (pessoaToUpdate == null) {
                 JOptionPane.showMessageDialog(null, "Pessoa não encontrada.");
                 return;
             }
-
+                
             if (cpf == null || cpf.isBlank()
                     || nome == null || nome.isBlank()
                     || idade == null || idade.isBlank()
@@ -230,6 +243,31 @@ public class UpdateMorador extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        String cpf = cpfInput.getText();
+        String nome = nomeInput.getText();
+        String idade = idadeInput.getText();
+        String rg = rgInput.getText();
+
+        CPFAdapter adapter = new CPFAdapter(cpf);
+
+            if (!adapter.validateCpf()) {
+                JOptionPane.showMessageDialog(rootPane, "Cpf inválido");
+                return;
+            }
+
+        try {
+            var pessoaToUpdate = pessoaController.findOne(cpf, "cpf");
+             nomeInput.setText(pessoaToUpdate.getNome());
+            idadeInput.setText(String.valueOf(pessoaToUpdate.getIdade()));
+            rgInput.setText(pessoaToUpdate.getCpf());
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          
+            
+    }//GEN-LAST:event_searchButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -290,5 +328,6 @@ public class UpdateMorador extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JTextField nomeInput;
     private javax.swing.JTextField rgInput;
+    private javax.swing.JButton searchButton;
     // End of variables declaration//GEN-END:variables
 }
