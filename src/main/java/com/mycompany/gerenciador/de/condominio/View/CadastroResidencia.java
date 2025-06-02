@@ -5,8 +5,10 @@
 package com.mycompany.gerenciador.de.condominio.View;
 
 import com.mycompany.gerenciador.de.condominio.Controllers.MoradorResidenciaController;
+import com.mycompany.gerenciador.de.condominio.Controllers.PagamentoResidenciaController;
 import com.mycompany.gerenciador.de.condominio.Controllers.PessoaController;
 import com.mycompany.gerenciador.de.condominio.Controllers.ResidenciaController;
+import com.mycompany.gerenciador.de.condominio.Enums.StatusPagamento;
 import com.mycompany.gerenciador.de.condominio.Models.Pessoa;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -21,6 +23,7 @@ public class CadastroResidencia extends javax.swing.JFrame {
     private final PessoaController pc;
     private final MoradorResidenciaController mrc;
     private final ResidenciaController rc;
+    private final PagamentoResidenciaController pagamentoResidenciaController;
     /**
      * Creates new form CadastroResidencia
      */
@@ -28,6 +31,7 @@ public class CadastroResidencia extends javax.swing.JFrame {
         pc = new PessoaController();
         mrc = new MoradorResidenciaController();
         rc = new ResidenciaController();
+        pagamentoResidenciaController = new PagamentoResidenciaController();
         initComponents();
         try {
             var pessoas = pc.findAll();
@@ -232,7 +236,9 @@ public class CadastroResidencia extends javax.swing.JFrame {
         }
         try {
             var pessoaMorador = pc.findOne(moradorNome);
-            if(rc.create(pessoaMorador.getId(), rua, cep, numero)){
+            var novaResidencia = rc.create(pessoaMorador.getId(), rua, cep, numero);
+            if(novaResidencia != null){
+                pagamentoResidenciaController.create(novaResidencia.getId(), 2000, StatusPagamento.A_PAGAR);
                 JOptionPane.showMessageDialog(rootPane, "Residencia cadastrada com sucesso");
             }
         } catch (SQLException ex) {

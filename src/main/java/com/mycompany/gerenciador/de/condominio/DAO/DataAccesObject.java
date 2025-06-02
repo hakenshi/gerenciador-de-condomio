@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,7 +37,6 @@ public abstract class DataAccesObject<T> {
         this.tableName = tableName;
         this.fillable = fillable;
     }
-
 
     private String buildQueryString(boolean isUpdating) {
         if (isUpdating) {
@@ -75,12 +75,14 @@ public abstract class DataAccesObject<T> {
 
     public T findOne(String value, String columnName) throws SQLException {
 
-        if (Arrays.stream(fillable).noneMatch(f -> f.equals(columnName)))
-            throw new IllegalArgumentException("No fillable columns defined for this DAO.");{
+        if (Arrays.stream(fillable).noneMatch(f -> f.equals(columnName))) {
+            throw new IllegalArgumentException("No fillable columns defined for this DAO.");
+        }
+        {
 
         }
 
-        String query = "SELECT * FROM " + tableName + " WHERE "+ columnName + " = ?";
+        String query = "SELECT * FROM " + tableName + " WHERE " + columnName + " = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, value);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -97,6 +99,25 @@ public abstract class DataAccesObject<T> {
         mapUpdate(preparedStatement, entity);
         var affectedRows = preparedStatement.executeUpdate();
         return affectedRows > 0;
+    }
+
+    public T createAndReturn(T entity) throws SQLException {
+        String query = buildQueryString(false);
+        PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+        mapUpdate(preparedStatement, entity);
+        var affectedRows = preparedStatement.executeUpdate();
+
+        if (affectedRows == 0) {
+            throw new SQLException("Creating new resource failed, no rows affcted");
+        }
+
+        ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+        if (generatedKeys.next()) {
+            int id = generatedKeys.getInt(1); // supondo que o ID seja um long
+            return findOne(id); // método que você precisa ter para buscar o T pelo ID
+        } else {
+            throw new SQLException("Creating entity failed, no ID obtained.");
+        }
     }
 
     public void update(T entity, int id) throws SQLException {
