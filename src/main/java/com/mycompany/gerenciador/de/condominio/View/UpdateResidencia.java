@@ -11,9 +11,12 @@ import com.mycompany.gerenciador.de.condominio.Controllers.ResidenciaController;
 import com.mycompany.gerenciador.de.condominio.Enums.StatusPagamento;
 import com.mycompany.gerenciador.de.condominio.Models.Pessoa;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,6 +28,7 @@ public class UpdateResidencia extends javax.swing.JFrame {
     private final MoradorResidenciaController mrc;
     private final ResidenciaController rc;
     private final PagamentoResidenciaController pagamentoResidenciaController;
+    
 
     /**
      * Creates new form CadastroResidencia
@@ -46,28 +50,118 @@ public class UpdateResidencia extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel5 = new javax.swing.JLabel();
+        idResidencia = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        ruaResidencia = new javax.swing.JTextField();
+        buscarBtn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        numResidencia = new javax.swing.JTextField();
+        textceo = new javax.swing.JLabel();
+        cepResidencia = new javax.swing.JTextField();
+        residenciaCep = new javax.swing.JTextField();
+        residenciaNumero = new javax.swing.JTextField();
+        updateResidencia = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        endereco = new javax.swing.JTextField();
-        cepMorador = new javax.swing.JTextField();
-        numeroMorador = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        endereco1 = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        cadMorador = new javax.swing.JMenuItem();
-        ListMorador = new javax.swing.JMenuItem();
-        AtuMorador = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        CadResidencia = new javax.swing.JMenuItem();
-        ListResidencia = new javax.swing.JMenuItem();
-        AtuResidencia = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        jMenu8 = new javax.swing.JMenu();
+        jMenu10 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
+        jMenu9 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel5.setText("ATUALIZAR RESIDENCIA");
+
+        idResidencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idResidenciaActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Rua: ");
+
+        buscarBtn.setText("Buscar");
+        buscarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Número:");
+
+        numResidencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numResidenciaActionPerformed(evt);
+            }
+        });
+
+        textceo.setText("CEP:");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 360, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(numResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(51, 51, 51)
+                            .addComponent(textceo)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(cepResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(jLabel6)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(ruaResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGap(155, 155, 155)
+                            .addComponent(buscarBtn)))
+                    .addContainerGap()))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(7, 7, 7)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(numResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textceo)
+                        .addComponent(cepResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(ruaResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(buscarBtn)
+                    .addContainerGap(8, Short.MAX_VALUE)))
+        );
+
+        updateResidencia.setText("Atualizar");
+        updateResidencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateResidenciaActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Rua");
 
@@ -75,97 +169,119 @@ public class UpdateResidencia extends javax.swing.JFrame {
 
         jLabel4.setText("Numero");
 
+        jLabel7.setText("id");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(48, 48, 48)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel3))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel4))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))))
-                .addContainerGap(44, Short.MAX_VALUE))
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel7)))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Cadastrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        endereco1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                endereco1ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cepMorador)
-                    .addComponent(endereco)
-                    .addComponent(numeroMorador)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(cepMorador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(numeroMorador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(11, Short.MAX_VALUE))
-        );
-
-        jLabel5.setText("ATUALIZAR RESIDENCIA");
-
         jMenu1.setText("Moradores");
 
-        cadMorador.setText("Cadastrar");
-        jMenu1.add(cadMorador);
+        jMenu5.setText("Listar");
+        jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu5MouseClicked(evt);
+            }
+        });
+        jMenu1.add(jMenu5);
 
-        ListMorador.setText("Listar");
-        jMenu1.add(ListMorador);
+        jMenu6.setText("Atualizar");
+        jMenu6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu6MouseClicked(evt);
+            }
+        });
+        jMenu1.add(jMenu6);
 
-        AtuMorador.setText("Atualizar");
-        jMenu1.add(AtuMorador);
+        jMenu4.setText("Cadastrar");
+        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu4MouseClicked(evt);
+            }
+        });
+        jMenu1.add(jMenu4);
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Residencias");
+        jMenu2.setText("Residências");
 
-        CadResidencia.setText("Cadastrar");
-        jMenu2.add(CadResidencia);
+        jMenu7.setText("Listar");
+        jMenu7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu7MouseClicked(evt);
+            }
+        });
+        jMenu2.add(jMenu7);
 
-        ListResidencia.setText("Listar");
-        jMenu2.add(ListResidencia);
+        jMenu8.setText("Atualizar");
+        jMenu8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu8MouseClicked(evt);
+            }
+        });
+        jMenu2.add(jMenu8);
 
-        AtuResidencia.setText("Atualizar");
-        jMenu2.add(AtuResidencia);
+        jMenu10.setText("Cadastrar");
+        jMenu10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu10MouseClicked(evt);
+            }
+        });
+        jMenu2.add(jMenu10);
 
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Pagamentos");
+        jMenu3.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+                jMenu3MenuCanceled(evt);
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+            }
+        });
+
+        jMenu9.setText("Listar");
+        jMenu9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu9MouseClicked(evt);
+            }
+        });
+        jMenu3.add(jMenu9);
+
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -174,54 +290,174 @@ public class UpdateResidencia extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(166, 166, 166))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(residenciaCep)
+                    .addComponent(idResidencia)
+                    .addComponent(residenciaNumero)
+                    .addComponent(updateResidencia, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                    .addComponent(endereco1))
+                .addGap(30, 30, 30))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(134, 134, 134))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(13, 13, 13)
+                .addGap(17, 17, 17)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(idResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(endereco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addComponent(residenciaCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(residenciaNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(updateResidencia))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String rua = endereco.getText();
-        String cep = cepMorador.getText();
-        int numero = Integer.parseInt(numeroMorador.getText());
-
-        if (rua.isEmpty() || cep.isEmpty() || numeroMorador.getText().isEmpty()) {
+    private void updateResidenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateResidenciaActionPerformed
+        String rua = endereco1.getText();
+        String cep = residenciaCep.getText();
+        int numero = Integer.parseInt(residenciaNumero.getText());
+        int id = Integer.parseInt(idResidencia.getText());
+        if (rua.isEmpty() || cep.isEmpty() || residenciaNumero.getText().isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Informações nulas não são permitidas");
             return;
         }
         try {
-            var residencia = rc.findOne(numero, cep, rua);
-
-            if (residencia == null) {
-                JOptionPane.showMessageDialog(rootPane, "Informações nulas não são permitidas");
-                return;
-            }
+            var residencia = rc.findOne(id);
             rc.update(residencia.getId(), residencia.getIdPessoa(), rua, cep, numero);
+            JOptionPane.showMessageDialog(rootPane, "Residencia atualizada com sucesso");
         } catch (SQLException ex) {
             Logger.getLogger(UpdateResidencia.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_updateResidenciaActionPerformed
+
+    private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
+        this.dispose();
+        try {
+            ListarMoradores lm = new ListarMoradores();
+            lm.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenu5MouseClicked
+
+    private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
+        this.dispose();
+        try {
+            UpdateMorador um = new UpdateMorador();
+            um.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenu6MouseClicked
+
+    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+        this.dispose();
+        try {
+            CadastroMorador crm = new CadastroMorador();
+            crm.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenu4MouseClicked
+
+    private void jMenu7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu7MouseClicked
+        this.dispose();
+        try {
+            ListarResidencia lr = new ListarResidencia();
+            lr.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenu7MouseClicked
+
+    private void jMenu8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu8MouseClicked
+        this.dispose();
+        try {
+            UpdateResidencia ur = new UpdateResidencia();
+            ur.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenu8MouseClicked
+
+    private void jMenu10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu10MouseClicked
+        this.dispose();
+        try {
+            CadastroResidencia cr = new CadastroResidencia();
+            cr.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenu10MouseClicked
+
+    private void jMenu9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu9MouseClicked
+        this.dispose();
+        try {
+            Pagamentos p = new Pagamentos();
+            p.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenu9MouseClicked
+
+    private void jMenu3MenuCanceled(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenu3MenuCanceled
+
+    }//GEN-LAST:event_jMenu3MenuCanceled
+
+    private void buscarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarBtnActionPerformed
+        int numero = Integer.parseInt(numResidencia.getText());
+        String cep = cepResidencia.getText();
+        String rua = ruaResidencia.getText();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        try {
+            var residencia = rc.findOne(numero, cep, rua);
+            idResidencia.setText(String.valueOf(residencia.getId()));
+            idResidencia.setEditable(false);
+            endereco1.setText(residencia.getRua());
+            residenciaCep.setText(residencia.getCep());
+            residenciaNumero.setText(String.valueOf(residencia.getNumero()));
+        } catch (SQLException ex) {
+            Logger.getLogger(Pagamentos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_buscarBtnActionPerformed
+
+    private void numResidenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numResidenciaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_numResidenciaActionPerformed
+
+    private void idResidenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idResidenciaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idResidenciaActionPerformed
+
+    private void endereco1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endereco1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_endereco1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,25 +500,35 @@ public class UpdateResidencia extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem AtuMorador;
-    private javax.swing.JMenuItem AtuResidencia;
-    private javax.swing.JMenuItem CadResidencia;
-    private javax.swing.JMenuItem ListMorador;
-    private javax.swing.JMenuItem ListResidencia;
-    private javax.swing.JMenuItem cadMorador;
-    private javax.swing.JTextField cepMorador;
-    private javax.swing.JTextField endereco;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton buscarBtn;
+    private javax.swing.JTextField cepResidencia;
+    private javax.swing.JTextField endereco1;
+    private javax.swing.JTextField idResidencia;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField numeroMorador;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JTextField numResidencia;
+    private javax.swing.JTextField residenciaCep;
+    private javax.swing.JTextField residenciaNumero;
+    private javax.swing.JTextField ruaResidencia;
+    private javax.swing.JLabel textceo;
+    private javax.swing.JButton updateResidencia;
     // End of variables declaration//GEN-END:variables
 }

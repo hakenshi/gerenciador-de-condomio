@@ -57,13 +57,16 @@ public class ListarResidencia extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableResidencias = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenu13 = new javax.swing.JMenu();
+        jMenu14 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
+        jMenu8 = new javax.swing.JMenu();
+        jMenu10 = new javax.swing.JMenu();
+        jMenu15 = new javax.swing.JMenu();
+        jMenu9 = new javax.swing.JMenu();
 
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
@@ -96,33 +99,82 @@ public class ListarResidencia extends javax.swing.JFrame {
             tableResidencias.getColumnModel().getColumn(0).setResizable(false);
         }
 
-        jMenu2.setText("Moradores");
+        jMenu1.setText("Moradores");
 
-        jMenuItem1.setText("Listar");
-        jMenu2.add(jMenuItem1);
-
-        jMenuItem2.setText("Cadastar");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+        jMenu5.setText("Listar");
+        jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu5MouseClicked(evt);
             }
         });
-        jMenu2.add(jMenuItem2);
+        jMenu1.add(jMenu5);
+
+        jMenu13.setText("Atualizar");
+        jMenu13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu13MouseClicked(evt);
+            }
+        });
+        jMenu1.add(jMenu13);
+
+        jMenu14.setText("Cadastrar");
+        jMenu14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu14MouseClicked(evt);
+            }
+        });
+        jMenu1.add(jMenu14);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Residências");
+
+        jMenu7.setText("Listar");
+        jMenu7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu7MouseClicked(evt);
+            }
+        });
+        jMenu2.add(jMenu7);
+
+        jMenu8.setText("Atualizar");
+        jMenu8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu8MouseClicked(evt);
+            }
+        });
+        jMenu2.add(jMenu8);
+
+        jMenu10.setText("Cadastrar");
+        jMenu10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu10MouseClicked(evt);
+            }
+        });
+        jMenu2.add(jMenu10);
 
         jMenuBar1.add(jMenu2);
 
-        jMenu5.setText("Residências");
+        jMenu15.setText("Pagamentos");
+        jMenu15.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+                jMenu15MenuCanceled(evt);
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+            }
+        });
 
-        jMenuItem4.setText("Listar");
-        jMenu5.add(jMenuItem4);
+        jMenu9.setText("Listar");
+        jMenu9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu9MouseClicked(evt);
+            }
+        });
+        jMenu15.add(jMenu9);
 
-        jMenuItem5.setText("Cadastrar");
-        jMenu5.add(jMenuItem5);
-
-        jMenuBar1.add(jMenu5);
-
-        jMenu7.setText("Pagamentos");
-        jMenuBar1.add(jMenu7);
+        jMenuBar1.add(jMenu15);
 
         setJMenuBar(jMenuBar1);
 
@@ -153,9 +205,81 @@ public class ListarResidencia extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
+        this.dispose();
+        try {
+            ListarMoradores lm = new ListarMoradores();
+            lm.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jMenu5MouseClicked
+
+    private void jMenu13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu13MouseClicked
+        this.dispose();
+        try {
+            UpdateMorador um = new UpdateMorador();
+            um.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jMenu13MouseClicked
+
+    private void jMenu14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu14MouseClicked
+        this.dispose();
+        try {
+            CadastroMorador crm = new CadastroMorador();
+            crm.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenu14MouseClicked
+
+    private void jMenu7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu7MouseClicked
+        this.dispose();
+        try {
+            ListarResidencia lr = new ListarResidencia();
+            lr.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenu7MouseClicked
+
+    private void jMenu8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu8MouseClicked
+        this.dispose();
+        try {
+            UpdateResidencia ur = new UpdateResidencia();
+            ur.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenu8MouseClicked
+
+    private void jMenu10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu10MouseClicked
+        this.dispose();
+        try {
+            CadastroResidencia cr = new CadastroResidencia();
+            cr.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenu10MouseClicked
+
+    private void jMenu9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu9MouseClicked
+        this.dispose();
+        try {
+            Pagamentos p = new Pagamentos();
+            p.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenu9MouseClicked
+
+    private void jMenu15MenuCanceled(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenu15MenuCanceled
+
+    }//GEN-LAST:event_jMenu15MenuCanceled
 
     /**
      * @param args the command line arguments
@@ -196,22 +320,25 @@ public class ListarResidencia extends javax.swing.JFrame {
             }
         });
     }
-
+                                 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu10;
+    private javax.swing.JMenu jMenu13;
+    private javax.swing.JMenu jMenu14;
+    private javax.swing.JMenu jMenu15;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JScrollPane jScrollPane1;

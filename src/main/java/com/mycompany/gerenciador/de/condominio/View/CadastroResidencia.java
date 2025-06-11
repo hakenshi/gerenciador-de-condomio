@@ -66,14 +66,15 @@ public class CadastroResidencia extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        cadMorador = new javax.swing.JMenuItem();
-        ListMorador = new javax.swing.JMenuItem();
-        AtuMorador = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        CadResidencia = new javax.swing.JMenuItem();
-        ListResidencia = new javax.swing.JMenuItem();
-        AtuResidencia = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        jMenu8 = new javax.swing.JMenu();
+        jMenu10 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
+        jMenu9 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -166,31 +167,79 @@ public class CadastroResidencia extends javax.swing.JFrame {
 
         jMenu1.setText("Moradores");
 
-        cadMorador.setText("Cadastrar");
-        jMenu1.add(cadMorador);
+        jMenu5.setText("Listar");
+        jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu5MouseClicked(evt);
+            }
+        });
+        jMenu1.add(jMenu5);
 
-        ListMorador.setText("Listar");
-        jMenu1.add(ListMorador);
+        jMenu6.setText("Atualizar");
+        jMenu6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu6MouseClicked(evt);
+            }
+        });
+        jMenu1.add(jMenu6);
 
-        AtuMorador.setText("Atualizar");
-        jMenu1.add(AtuMorador);
+        jMenu4.setText("Cadastrar");
+        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu4MouseClicked(evt);
+            }
+        });
+        jMenu1.add(jMenu4);
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Residencias");
+        jMenu2.setText("Residências");
 
-        CadResidencia.setText("Cadastrar");
-        jMenu2.add(CadResidencia);
+        jMenu7.setText("Listar");
+        jMenu7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu7MouseClicked(evt);
+            }
+        });
+        jMenu2.add(jMenu7);
 
-        ListResidencia.setText("Listar");
-        jMenu2.add(ListResidencia);
+        jMenu8.setText("Atualizar");
+        jMenu8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu8MouseClicked(evt);
+            }
+        });
+        jMenu2.add(jMenu8);
 
-        AtuResidencia.setText("Atualizar");
-        jMenu2.add(AtuResidencia);
+        jMenu10.setText("Cadastrar");
+        jMenu10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu10MouseClicked(evt);
+            }
+        });
+        jMenu2.add(jMenu10);
 
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Pagamentos");
+        jMenu3.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+                jMenu3MenuCanceled(evt);
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+            }
+        });
+
+        jMenu9.setText("Listar");
+        jMenu9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu9MouseClicked(evt);
+            }
+        });
+        jMenu3.add(jMenu9);
+
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -251,6 +300,82 @@ public class CadastroResidencia extends javax.swing.JFrame {
         moradorCombox.setEditable(true);
     }//GEN-LAST:event_moradorComboxActionPerformed
 
+    private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
+        this.dispose();
+        try {
+            ListarMoradores lm = new ListarMoradores();
+            lm.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jMenu5MouseClicked
+
+    private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
+        this.dispose();
+        try {
+            UpdateMorador um = new UpdateMorador();
+            um.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jMenu6MouseClicked
+
+    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+        this.dispose();
+        try {
+            CadastroMorador crm = new CadastroMorador();
+            crm.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenu4MouseClicked
+
+    private void jMenu7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu7MouseClicked
+        this.dispose();
+        try {
+            ListarResidencia lr = new ListarResidencia();
+            lr.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenu7MouseClicked
+
+    private void jMenu8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu8MouseClicked
+        this.dispose();
+        try {
+            UpdateResidencia ur = new UpdateResidencia();
+            ur.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenu8MouseClicked
+
+    private void jMenu10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu10MouseClicked
+        this.dispose();
+        try {
+            CadastroResidencia cr = new CadastroResidencia();
+            cr.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenu10MouseClicked
+
+    private void jMenu9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu9MouseClicked
+        this.dispose();
+        try {
+            Pagamentos p = new Pagamentos();
+            p.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenu9MouseClicked
+
+    private void jMenu3MenuCanceled(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenu3MenuCanceled
+
+    }//GEN-LAST:event_jMenu3MenuCanceled
+
     /**
      * @param args the command line arguments
      */
@@ -291,12 +416,6 @@ public class CadastroResidencia extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem AtuMorador;
-    private javax.swing.JMenuItem AtuResidencia;
-    private javax.swing.JMenuItem CadResidencia;
-    private javax.swing.JMenuItem ListMorador;
-    private javax.swing.JMenuItem ListResidencia;
-    private javax.swing.JMenuItem cadMorador;
     private javax.swing.JTextField cepMorador;
     private javax.swing.JTextField endereco;
     private javax.swing.JButton jButton1;
@@ -306,8 +425,15 @@ public class CadastroResidencia extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

@@ -49,13 +49,16 @@ public class Pagamentos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablePagamento = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
-        menuMorador = new javax.swing.JMenu();
-        cadMorador = new javax.swing.JMenuItem();
-        listMorador = new javax.swing.JMenuItem();
-        menuResidencia = new javax.swing.JMenu();
-        cadResidencia = new javax.swing.JMenuItem();
-        listarResidencia = new javax.swing.JMenuItem();
-        menuPagamento = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu7 = new javax.swing.JMenu();
+        jMenu8 = new javax.swing.JMenu();
+        jMenu10 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu9 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,28 +94,82 @@ public class Pagamentos extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablePagamento);
 
-        menuMorador.setText("Morador");
+        jMenu1.setText("Moradores");
 
-        cadMorador.setText("Cadastrar");
-        menuMorador.add(cadMorador);
+        jMenu5.setText("Listar");
+        jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu5MouseClicked(evt);
+            }
+        });
+        jMenu1.add(jMenu5);
 
-        listMorador.setText("Listar");
-        menuMorador.add(listMorador);
+        jMenu6.setText("Atualizar");
+        jMenu6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu6MouseClicked(evt);
+            }
+        });
+        jMenu1.add(jMenu6);
 
-        jMenuBar1.add(menuMorador);
+        jMenu4.setText("Cadastrar");
+        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu4MouseClicked(evt);
+            }
+        });
+        jMenu1.add(jMenu4);
 
-        menuResidencia.setText("Residência");
+        jMenuBar1.add(jMenu1);
 
-        cadResidencia.setText("Cadastrar");
-        menuResidencia.add(cadResidencia);
+        jMenu2.setText("Residências");
 
-        listarResidencia.setText("Listar");
-        menuResidencia.add(listarResidencia);
+        jMenu7.setText("Listar");
+        jMenu7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu7MouseClicked(evt);
+            }
+        });
+        jMenu2.add(jMenu7);
 
-        jMenuBar1.add(menuResidencia);
+        jMenu8.setText("Atualizar");
+        jMenu8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu8MouseClicked(evt);
+            }
+        });
+        jMenu2.add(jMenu8);
 
-        menuPagamento.setText("Pagamentos");
-        jMenuBar1.add(menuPagamento);
+        jMenu10.setText("Cadastrar");
+        jMenu10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu10MouseClicked(evt);
+            }
+        });
+        jMenu2.add(jMenu10);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Pagamentos");
+        jMenu3.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+                jMenu3MenuCanceled(evt);
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+            }
+        });
+
+        jMenu9.setText("Listar");
+        jMenu9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu9MouseClicked(evt);
+            }
+        });
+        jMenu3.add(jMenu9);
+
+        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
@@ -193,6 +250,82 @@ public class Pagamentos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buscarBtnActionPerformed
 
+    private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
+        this.dispose();
+        try {
+            ListarMoradores lm = new ListarMoradores();
+            lm.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jMenu5MouseClicked
+
+    private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
+        this.dispose();
+        try {
+            UpdateMorador um = new UpdateMorador();
+            um.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jMenu6MouseClicked
+
+    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+        this.dispose();
+        try {
+            CadastroMorador crm = new CadastroMorador();
+            crm.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenu4MouseClicked
+
+    private void jMenu7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu7MouseClicked
+        this.dispose();
+        try {
+            ListarResidencia lr = new ListarResidencia();
+            lr.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenu7MouseClicked
+
+    private void jMenu8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu8MouseClicked
+        this.dispose();
+        try {
+            UpdateResidencia ur = new UpdateResidencia();
+            ur.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenu8MouseClicked
+
+    private void jMenu10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu10MouseClicked
+        this.dispose();
+        try {
+            CadastroResidencia cr = new CadastroResidencia();
+            cr.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenu10MouseClicked
+
+    private void jMenu9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu9MouseClicked
+        this.dispose();
+        try {
+            Pagamentos p = new Pagamentos();
+            p.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroMorador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenu9MouseClicked
+
+    private void jMenu3MenuCanceled(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenu3MenuCanceled
+
+    }//GEN-LAST:event_jMenu3MenuCanceled
+
     /**
      * @param args the command line arguments
      */
@@ -234,18 +367,21 @@ public class Pagamentos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buscarBtn;
-    private javax.swing.JMenuItem cadMorador;
-    private javax.swing.JMenuItem cadResidencia;
     private javax.swing.JTextField cepResidencia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu10;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JMenuItem listMorador;
-    private javax.swing.JMenuItem listarResidencia;
-    private javax.swing.JMenu menuMorador;
-    private javax.swing.JMenu menuPagamento;
-    private javax.swing.JMenu menuResidencia;
     private javax.swing.JTextField numResidencia;
     private javax.swing.JTextField ruaResidencia;
     private javax.swing.JTable tablePagamento;
